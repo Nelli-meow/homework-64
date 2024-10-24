@@ -2,11 +2,13 @@ import * as React from 'react';
 import { useState } from 'react';
 import { IPost } from '../../types';
 
+const initialFrom = {
+  title: '',
+  description: '',
+}
+
 const Add = () => {
-  const [post, setPost] = useState<IPost>({
-    title: '',
-    description: '',
-  });
+  const [post, setPost] = useState<IPost>({...initialFrom});
 
   const onChangeField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -15,11 +17,14 @@ const Add = () => {
       ...prevState,
       [name]: value
     }));
+
   };
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(post);
+
+    setPost({...initialFrom})
   };
 
   return (
