@@ -8,19 +8,18 @@ const Add = () => {
     description: '',
   });
 
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const onChangeField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
 
-  const addPost = (e: React.FormEvent) => {
+    setPost(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (post.title.length === 0 || post.description.length === 0) {
-      alert('Enter valid title and description');
-    } else {
-      const newPost = { id: String(new Date()), title: post.title, description: post.description };
-      setPosts([newPost, ...posts]);
-      setPost({ title: '', description: '' });
-      console.log(post);
-    }
+    console.log(post);
   };
 
   return (
@@ -28,21 +27,23 @@ const Add = () => {
       <div className="row border border-3 rounded">
         <h1 className="m-3">Add new post</h1>
         <div>
-          <form onSubmit={addPost}>
+          <form onSubmit={onSubmitForm}>
             <div className="m-3">
               <label className="form-label">Title</label>
               <input
+                name="title"
                 value={post.title}
                 type="text"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPost({ ...post, title: e.target.value })}
+                onChange={onChangeField}
                 className="form-control" />
             </div>
             <div className="m-3">
               <label className="form-label">Description</label>
               <textarea
+                name="description"
                 value={post.description}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setPost({ ...post, description: e.target.value })}
-                className="form-control"></textarea>
+                onChange={onChangeField}
+                className="form-control"/>
             </div>
 
             <div className="m-3">
