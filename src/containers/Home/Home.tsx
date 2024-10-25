@@ -40,6 +40,7 @@ const Home = () => {
         <p>No posts :(</p>
       ) : (
         <>
+          <h1 className="text-center m-4">All posts</h1>
           {posts.map((post) => (
             <div className="border border-secondary m-4 p-4" key={post.id}>
               <span className="text-body-tertiary">Created on: {post.date}</span>
