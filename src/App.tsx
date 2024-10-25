@@ -3,7 +3,7 @@ import Header from './components/Header/Header.tsx';
 import { Route, Routes } from 'react-router-dom';
 import Add from './containers/Add/Add.tsx';
 import Home from './containers/Home/Home.tsx';
-import OnePost from './containers/OnePost/OnePost.tsx';
+import OnePost from './components/OnePost/OnePost.tsx';
 
 const App = () => {
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import OnePost from '../../containers/OnePost/OnePost.tsx';
+import OnePost from '../OnePost/OnePost.tsx';
 
 const ReadMoreBtn = () => {
 

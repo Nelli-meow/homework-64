@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../axiosAPI.ts';
 import { IPosts, IPostsApi } from '../../types';
-import OnePost from '../OnePost/OnePost.tsx';
+import OnePost from '../../components/OnePost/OnePost.tsx';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
