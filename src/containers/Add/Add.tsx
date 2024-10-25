@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { IPost } from '../../types';
+import axiosApi from '../../axiosAPI.ts';
 
 const initialFrom = {
   title: '',
@@ -20,9 +21,11 @@ const Add = () => {
 
   };
 
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(post);
+
+    await axiosApi.post('posts.json', post)
 
     setPost({...initialFrom})
   };
