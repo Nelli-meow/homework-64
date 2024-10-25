@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import axiosApi from '../../axiosAPI.ts';
 import { IPosts, IPostsApi } from '../../types';
-import OnePost from '../../components/OnePost/OnePost.tsx';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -37,7 +36,6 @@ const Home = () => {
               <span className="text-body-tertiary">Created on: {post.date}</span>
               <h3>{post.title}</h3>
               <Link
-                component={OnePost}
                 to={`/posts/${post.id}`}
                 type="button"
                 className="btn btn-outline-warning m-auto">Read more >></Link>

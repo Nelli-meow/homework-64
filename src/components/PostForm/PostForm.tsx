@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IPost } from '../../types';
 import axiosApi from '../../axiosAPI.ts';
 
@@ -8,8 +8,21 @@ const initialFrom = {
   description: '',
 }
 
-const PostForm = () => {
+interface Props {
+  postToEdit?: IPost;
+}
+
+const PostForm: React.FC<Props> = ({postToEdit}) => {
   const [post, setPost] = useState<IPost>({...initialFrom});
+
+  useEffect(() => {
+    if(postToEdit) {
+      setPost(prevState => ({
+        ...prevState,
+        ...postToEdit,
+      }));
+    }
+  },[postToEdit])
 
   const onChangeField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,17 +36,18 @@ const PostForm = () => {
 
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(post);
 
     await axiosApi.post('posts.json', {...post, date: String(new Date())});
 
-    setPost({...initialFrom})
+    if(!postToEdit) {
+      setPost({...initialFrom});
+    }
   };
 
   return (
     <div className="container mt-5">
       <div className="row border border-3 rounded">
-        <h1 className="m-3">Add new post</h1>
+        <h1 className="m-3">{postToEdit ? 'Edit' : 'Save new'} post</h1>
         <div>
           <form onSubmit={onSubmitForm}>
             <div className="m-3">
@@ -55,7 +69,7 @@ const PostForm = () => {
             </div>
 
             <div className="m-3">
-              <button type="submit" className="btn btn-outline-info">Save</button>
+              <button type="submit" className="btn btn-outline-info">{postToEdit ? 'Edit' : 'Save'}</button>
             </div>
           </form>
         </div>

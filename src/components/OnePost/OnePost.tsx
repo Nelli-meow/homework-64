@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { IPostsApi } from '../../types';
 import axiosApi from '../../axiosAPI.ts';
@@ -33,8 +33,8 @@ const OnePost = () => {
         <h2>{post.title}<span className="ms-2 text-body-tertiary fs-5">{post.date}</span></h2>
         <p>{post.description}</p>
         <div className="d-flex align-items-center justify-content-sm-between m-2">
-          <button type="button" className="btn btn-outline-primary">Edit</button>
-          <button type="button" className="btn btn-outline-danger">Delete</button>
+          <Link type="button" className="btn btn-outline-primary"  to={`/posts/${params.idPost}/edit`}>Edit</Link>
+          <Link type="button" className="btn btn-outline-danger"  to={`/posts/${params.idPost}/edit`} >Delete</Link>
         </div>
       </div>
     </div>
