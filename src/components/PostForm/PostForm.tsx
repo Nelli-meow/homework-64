@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IPost, IPosts } from '../../types';
-import axiosApi from '../../axiosAPI.ts';
 
 const initialFrom = {
   title: '',

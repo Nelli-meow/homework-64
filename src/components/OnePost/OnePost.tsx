@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { IPostsApi } from '../../types';
 import axiosApi from '../../axiosAPI.ts';
@@ -7,6 +7,7 @@ import axiosApi from '../../axiosAPI.ts';
 const OnePost = () => {
   const [post, setPost] = useState<IPostsApi>({});
   const params = useParams<{idPost: string}>();
+  const navigate = useNavigate();
 
   const fetchOnePost = useCallback(async (id: string) => {
     try {
@@ -19,6 +20,17 @@ const OnePost = () => {
       console.error('Error fetching data:', error);
     }
   }, []);
+
+  const deletePost = async () => {
+    if (params.idPost) {
+      try {
+        await axiosApi.delete(`posts/${params.idPost}.json`);
+        navigate('/');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   useEffect(() => {
     if(params.idPost) {
@@ -34,7 +46,7 @@ const OnePost = () => {
         <p>{post.description}</p>
         <div className="d-flex align-items-center justify-content-sm-between m-2">
           <Link type="button" className="btn btn-outline-primary"  to={`/posts/${params.idPost}/edit`}>Edit</Link>
-          <Link type="button" className="btn btn-outline-danger"  to={`/posts/${params.idPost}/edit`} >Delete</Link>
+          <button type="button" className="btn btn-outline-danger" onClick={deletePost} >Delete</button>
         </div>
       </div>
     </div>
