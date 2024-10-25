@@ -25,7 +25,7 @@ const Add = () => {
     e.preventDefault();
     console.log(post);
 
-    await axiosApi.post('posts.json', post)
+    await axiosApi.post('posts.json', {...post, date: String(new Date())});
 
     setPost({...initialFrom})
   };
