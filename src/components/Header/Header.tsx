@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   return (
-    <header className="bg-danger-subtle">
+    <header className="bg-warning-subtle">
       <nav className="navbar navbar-expand-lg">
         <div className="container">
           <NavLink className="text-black p-2 fs-4 text-decoration-none" to="/">Nelli-meow</NavLink>
