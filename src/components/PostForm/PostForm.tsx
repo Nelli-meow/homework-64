@@ -8,7 +8,7 @@ const initialFrom = {
   description: '',
 }
 
-const Add = () => {
+const PostForm = () => {
   const [post, setPost] = useState<IPost>({...initialFrom});
 
   const onChangeField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -64,4 +64,4 @@ const Add = () => {
   );
 };
 
-export default Add;
+export default PostForm;
