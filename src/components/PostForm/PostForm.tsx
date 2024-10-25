@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { IPost } from '../../types';
+import { IPost, IPosts } from '../../types';
 import axiosApi from '../../axiosAPI.ts';
 
 const initialFrom = {
@@ -10,9 +10,10 @@ const initialFrom = {
 
 interface Props {
   postToEdit?: IPost;
+  submitForm: (post: IPosts) => void;
 }
 
-const PostForm: React.FC<Props> = ({postToEdit}) => {
+const PostForm: React.FC<Props> = ({postToEdit, submitForm}) => {
   const [post, setPost] = useState<IPost>({...initialFrom});
 
   useEffect(() => {
@@ -37,7 +38,8 @@ const PostForm: React.FC<Props> = ({postToEdit}) => {
   const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await axiosApi.post('posts.json', {...post, date: String(new Date())});
+    submitForm({...post, date: String(new Date())});
+
 
     if(!postToEdit) {
       setPost({...initialFrom});
